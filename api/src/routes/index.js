@@ -28,6 +28,4 @@ router.get("/recipes/:idRecipe",  async (req, res) => {
 
 // router.get('/diets?api_key={API_KEY}', dietController.getAll);
 
-module.exports = router;
-
 
