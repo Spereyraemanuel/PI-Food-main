@@ -1,5 +1,5 @@
 const { Router } = require("express");
-router = Router();
+const router = Router();
 axios = require("axios");
 const { getAllRecipes,} = require("../../controllers/recipes.controller")
 const { Recipe, TypeDiet } = require("../../db")

@@ -1,18 +1,17 @@
-const { TypeDiet, Recipe} = require("../../db")
+const { TypeDiet, Recipe } = require("../../db")
 const { Router } = require("express");
 const router = Router();
 
-router.post("/", async (res,req,next) => {
-    let {
+router.post("/", async (res,req) => {
+    const {
         title,
         summary,
         healthScore,
         instructions,
         createdInDb,
-        TypeDiet
     } = req.body
     if(!title || !summary) {
-        return res.status(400).send("Please, insert a title and a summary to continue!")
+     res.status(400).send("Please, insert a title and a summary to continue!")
     }
     else{
         try {
@@ -30,7 +29,7 @@ router.post("/", async (res,req,next) => {
                  createRecipe.addDiet(dietTypeDb)
                  res.status(200).send("recipe created")
         } catch (err) {
-            next(err)
+            console.log(err)
         }
     }});
 
@@ -44,3 +43,5 @@ router.post("/", async (res,req,next) => {
         res.status(400).send("Recipe not found")
      }
     })
+
+    module.exports = router;
