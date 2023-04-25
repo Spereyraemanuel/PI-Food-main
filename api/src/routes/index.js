@@ -1,11 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const recipes = require("./router_models/recipes.js");
-const diets = require("./router_models/diets.js");
-const recipe = require("./router_models/recipe.js");
+const { recipeid } = require("../controllers/recipesId.js");
 
+router.use("/recipe/:id", recipeid)
 router.use("/recipes/name", recipes)
-router.use("/:id", recipe)
 router.use("/", diets)
   
   module.exports = router;
