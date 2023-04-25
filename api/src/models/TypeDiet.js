@@ -9,7 +9,6 @@ module.exports = (Sequelize)=> {
          },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
     });
 };

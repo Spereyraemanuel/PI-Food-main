@@ -7,10 +7,9 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
-      unique: true,  
+      unique: true,
    },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -19,16 +18,19 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     summary: {
-      type: DataTypes.STRING(1000),
-      allowNull: false,
+      type : DataTypes.TEXT,
+      allowNull: false
     },
     healtScore: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.STRING
     },
     instrunction: {
-      type: DataTypes.STRING,
-      allowNull:false,
+      type : DataTypes.TEXT,
     },
+      createdInDb:{                                 
+        type : DataTypes.BOOLEAN,                    
+        allowNull: false,
+        defaultValue: true
+      },
   });
 };
