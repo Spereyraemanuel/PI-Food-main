@@ -1,7 +1,15 @@
 const { Router } = require("express")
-const index = Router()
+const router = Router()
 
-index.get("/recipe/:id");
+const recipes = require ("./recipesRouter")
+const types = require("./typeRouter")
+const recipe = require("./recipeRouter")
+
+
+
+router.use("/recipes", recipes);
+router.use("/recipe",recipe);
+router.use("/types", types);
 
   
   module.exports = router;
