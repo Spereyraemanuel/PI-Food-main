@@ -38,7 +38,6 @@ const getDBInfo = async () => {
     })
 }
 
-
 const getAllRecipes = async () => {
     const apiInfo = await getApiInfo()
     const dbInfo = await getDBInfo()
@@ -103,13 +102,10 @@ async function getAallRecipes(req, res) {
 
 
 
-
+// 
 module.exports= {
-  getAllRecipes,
-  getDBInfo,
-  getApiInfo,
-  getAallRecipes
+    getAllRecipes,
+    getDBInfo,
+    getApiInfo,
+    getAallRecipes
 }
-
-
-

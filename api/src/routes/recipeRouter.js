@@ -2,8 +2,7 @@ const { Router } = require('express');
 const{Recipe,TypeDiet} = require('../db')
 const router = Router();
 
-router.post('/', async (req,res) => {
-    try{ 
+router.post('/', async (req,res,next) => {
     let {
         title,
         summary,
@@ -13,11 +12,10 @@ router.post('/', async (req,res) => {
         typeDiets
     } = req.body;
     if(!title || !summary) {
-        return res.status(400).send('esta todo mal');
+        return res.status(400).send('Please, insert a title and a summary to continue!');
     }
-
     else{
-    let createRecipe = await Recipe.create({   
+    try{let createRecipe = await Recipe.create({   
             title,
             summary,
             healthScore,
@@ -25,13 +23,13 @@ router.post('/', async (req,res) => {
             createdInDb
     })
     let dietTypeDb = await TypeDiet.findAll({ where:{ name:typeDiets } })
-        createRecipe.addTypeDiet(dietTypeDb) //hacer forEach para agregar 
+        createRecipe.addTypeDiet(dietTypeDb)
         res.status(200).send('recipe created')   
-      }
+
     }catch(e){
-        res.send(e)
+        next(e)
     }
-});
+}});
 
 router.delete('/:id',async (req,res) =>{ // nada mas !! . espera. jaja. bueno te lo paso
     const {id} = req.params

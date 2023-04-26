@@ -1,10 +1,14 @@
 const { Router } = require('express');
 const router = Router();
-const {getAllRecipes} = require('../controllers/recipeController')
+const axios = require('axios');
+const {getAllRecipes, getAallRecipes} = require('../controllers/recipeController')
 const{Recipe,TypeDiet} = require('../db')
 
 
-router.get('/recipes',async (req,res) =>{
+
+router.get('/',getAallRecipes)
+
+router.get('/:id',async (req,res) =>{
     const {id} = req.params
     const allRecipes = await getAllRecipes()
     let validate = id.includes("-"); // si tiene el guion es porque se encuentra en la base de datos
@@ -31,5 +35,10 @@ router.get('/recipes',async (req,res) =>{
     }
   }
 });
+
+
+
+
+
 
 module.exports= router;
