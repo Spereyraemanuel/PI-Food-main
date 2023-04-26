@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const {TypeDiet} = require('../db');
-const {diets} = require('../controllers/diets')
+const {diets} = require('../controllers/dietsController')
 
 router.get('/', async (req,res) => {
         diets.forEach(e => {
