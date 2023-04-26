@@ -6,7 +6,6 @@ const{Recipe,TypeDiet} = require('../db')
 
 
 
-router.get('/',getAallRecipes)
 
 router.get('/:id',async (req,res) =>{
     const {id} = req.params
@@ -15,13 +14,9 @@ router.get('/:id',async (req,res) =>{
 
     if (validate) {
       try {
-        let dbId = await Recipe.findByPk(id, { include: TypeDiet });  // entonce la busco directo de la base de datos
-        res.status(200).json([dbId]);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    
+      const result = await getApiInfo();
+      res.send(result);
+
   else {
     try {
       if (id) {
