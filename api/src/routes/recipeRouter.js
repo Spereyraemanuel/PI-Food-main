@@ -1,33 +1,32 @@
 const { Router } = require('express');
-const{Recipe,TypeDiet} = require('../db')
+const{Recipe} = require('../db')
 const router = Router();
 
-router.post('/', async (req,res,next) => {
-    let {
+router.post('/', async (req,res) => {
+    const {
         title,
         summary,
         healthScore,
         analyzedInstructions,
         createdInDb,
-        typeDiets
     } = req.body;
     if(!title || !summary) {
         return res.status(400).send('Please, insert a title and a summary to continue!');
     }
     else{
-    try{let createRecipe = await Recipe.create({   
+    try{const createRecipe = await Recipe.create({   
             title,
             summary,
             healthScore,
             analyzedInstructions,
             createdInDb
     })
-    let dietTypeDb = await TypeDiet.findAll({ where:{ name:typeDiets } })
+    const dietTypeDb = await TypeDiet.findAll({ where:{ name:typeDiets } })
         createRecipe.addTypeDiet(dietTypeDb)
-        res.status(200).send('recipe created')   
+        res.status(200).json(createRecipe);   
 
     }catch(e){
-        next(e)
+        res.status(e)
     }
 }});
 
