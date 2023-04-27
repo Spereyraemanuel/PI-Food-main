@@ -1,5 +1,4 @@
 const { Router } = require('express');
-
 const router = Router();
 const recipes = require('./recipesRouter');
 const types = require('./typeRouter');
