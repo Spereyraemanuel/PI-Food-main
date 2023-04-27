@@ -1,44 +1,78 @@
 const { Router } = require('express');
-const router = Router();
-const axios = require('axios');
-const {getAllRecipes, getAallRecipes} = require('../controllers/recipeController')
-const{Recipe,TypeDiet} = require('../db')
+const recipeRouter = Router();
+// const { Recipe, TypeDiet} = require("../db")
+const {getApiInfo} = require("../controllers/recipeController")
+
+recipeRouter.get("/", getApiInfo)
+
+// recipeRouter.get("/:id", async(req, res)=> {
+//   try {
+//     const  { id } = req.params;
+//   //checkeamos si la receta existe en la base de datos,
+//   const recipe = await Recipe.findByPk(id, {
+//       include: {
+//         model:TypeDiet,
+//         attributes: ["name"],
+//         through: {
+//           attributes:[],
+//         },
+//       },
+//     });
+//     if(!recipe){
+//       //si la receta no existe que la busque desde la api,
+//       recipe = await getApiInfo(id);
+//      if(!recipe){
+//       //si tampoco se encuenta en la api, que arroje un error 400;
+//       res.status(400).json({message: "La recete no existe"})
+//      }
+//     }
+//     res.status(200).json(recipe);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// })
+
+// recipeRouter.get("/title", async (req, res)=> {
+//   try {
+//     const {title} = req.query
+//     const recipes = await Recipe.findAll({
+//       where: { //clausula de sql, que perime especificar condiciones para filtrado
+//         name: {
+//           [Op.iLike]: `%${title}%`, //[Op.iLike] sirve para ignorar mayusculas y minusculas, 
+//           // y el % sirve para buscar en la cadena de texto cualquier posiion de valor en la columna name
+//          },
+//       },
+//       include:{
+//         model: TypeDiet,
+//         attributes:["name"],
+//         through:{
+//           attributes: [],
+//         }
+//       }
+//     });
+//     if(recipes.length === 0){
+//       //si la receta no esta en la base de datos, que la obtenga desde la api;
+//       const apiRecipes = await getApiInfo(null, title);
+
+//       if(!apiRecipes || apiRecipes.length === 0){
+//         //si tampoco esta en la api que arroje un error 400
+//         res.status(400).json({message: "La receta no existe"})
+//       }
+
+//       res.status(200).json(apiRecipes);
+//     }
+
+//     res.status(200).json(recipes);
+//   }catch (error){
+//     res.status(400).json({message: error.message})
+//   }
+// })
 
 
 
-router.get('/',getAallRecipes)
-
-router.get('/:id',async (req,res) =>{
-    const {id} = req.params
-    const allRecipes = await getAllRecipes()
-    let validate = id.includes("-"); // si tiene el guion es porque se encuentra en la base de datos
-
-    if (validate) {
-      try {
-        let dbId = await Recipe.findByPk(id, { include: TypeDiet });  // entonce la busco directo de la base de datos
-        res.status(200).json([dbId]);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    
-  else {
-    try {
-      if (id) {
-        let recipeId = await allRecipes.filter((el) => el.id === parseInt(id));
-        recipeId.length
-          ? res.status(200).send(recipeId)
-          : res.status(400).send("Not fuound");
-      }
-    } catch (err) {
-      res.json({ message: err });
-    }
-  }
-});
 
 
 
 
 
-
-module.exports= router;
+module.exports= recipeRouter;
