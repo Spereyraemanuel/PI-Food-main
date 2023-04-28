@@ -1,74 +1,72 @@
 const { Router } = require('express');
-const recipesRouter = Router();
-// const { Recipe, TypeDiet } = require('../db');
-const { apiInfo } = require("../controllers/recipeController")
+const { Recipe, Diet } = require('../db');
+const router = Router();
+const { getConcat, getIdRecipes } = require('../controllers/recipeController');
 
-recipeRouter.get("/", getApiInfo)
+// Importar todos los routers;
+// Ejemplo: const authRouter = require('./auth.js');
+// Configurar los routers
+// Ejemplo: router.use('/auth', authRouter);
 
-// recipeRouter.get("/:id", async(req, res)=> {
-//   try {
-//     const  { id } = req.params;
-//   //checkeamos si la receta existe en la base de datos,
-//   const recipe = await Recipe.findByPk(id, {
-//       include: {
-//         model:TypeDiet,
-//         attributes: ["name"],
-//         through: {
-//           attributes:[],
-//         },
-//       },
-//     });
-//     if(!recipe){
-//       //si la receta no existe que la busque desde la api,
-//       recipe = await getApiInfo(id);
-//      if(!recipe){
-//       //si tampoco se encuenta en la api, que arroje un error 400;
-//       res.status(400).json({message: "La recete no existe"})
-//      }
-//     }
-//     res.status(200).json(recipe);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// })
+router.get('/', async (req, res, next) => {
+  const { name } = req.query;
+  const dbRecipes = await getConcat(next);
+  try {
+    if (name) {
+      const resultFind = dbRecipes.filter((e) => e.name.toLowerCase().includes(name.toLowerCase()));
+      if (resultFind.length === 0) {
+        return res.status(404).send({ message: 'No recipes found' });
+      }
+      return res.send(resultFind);
+    } else {
+      return res.send(dbRecipes);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
-// recipeRouter.get("/title", async (req, res)=> {
-//   try {
-//     const {title} = req.query
-//     const recipes = await Recipe.findAll({
-//       where: { //clausula de sql, que perime especificar condiciones para filtrado
-//         name: {
-//           [Op.iLike]: `%${title}%`, //[Op.iLike] sirve para ignorar mayusculas y minusculas, 
-//           // y el % sirve para buscar en la cadena de texto cualquier posiion de valor en la columna name
-//          },
-//       },
-//       include:{
-//         model: TypeDiet,
-//         attributes:["name"],
-//         through:{
-//           attributes: [],
-//         }
-//       }
-//     });
-//     if(recipes.length === 0){
-//       //si la receta no esta en la base de datos, que la obtenga desde la api;
-//       const apiRecipes = await getApiInfo(null, title);
+router.get('/:id', async (req, res, next) => {
+  const id = req.params.id;
+  const idRecipes = await getIdRecipes(id, next);
+  return res.send(idRecipes);
+});
 
+router.post('/', async (req, res, next) => {
+  try {
+    const { name, summary, healthScore, image, steps, diets } = req.body;
+    const newRecipe = await Recipe.create({
+      name,
+      summary,
+      healthScore,
+      image,
+      steps
+    });
+    let getAllDiet = await Diet.findAll({
+      where: {
+        name: diets
+      }
+    });
+    newRecipe.addDiet(getAllDiet);
+    return res.status(201).send(newRecipe);
+  } catch (error) {
+    next(error);
+  }
+});
 
-//       res.status(200).json(apiRecipes);
-//     }
+router.delete('/:id', (req, res, next) => {
+  const id = req.params.id;
+  Recipe.destroy({
+    where: {
+      id
+    }
+  })
+    .then(() => {
+      res.send('Recipe deleted');
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 
-//     res.status(200).json(recipes);
-//   }catch (error){
-//     res.status(400).json({message: error.message})
-//   }
-// })
-
-
-
-
-
-
-
-
-module.exports= recipeRouter;
+module.exports = router;
