@@ -1,30 +1,17 @@
 const { Router } = require('express');
-const { TypeDiet } = require('../db');
 const router = Router();
+const { Diet }  = require('../db');
+const {diets} = require('../controllers/dietsController')
 
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+router.get('/', async (req,res) => {
+        diets.forEach(e => {
+            Diet.findOrCreate({
+                where: {name:e.name}
+            })
+        })
 
-router.get('/', (req, res, next) => {
-  return TypeDiet.findAll().then((data) => {
-    res.send(data);
-  });
-});
+         const allTheTypes = await Diet.findAll();
+        res.send(allTheTypes.map(e => e.name))
+})
 
-// router.post('/', async (req, res, next) => {
-//   try {
-//     dietsDb.forEach((e) => {
-//       Diet.findOrCreate({
-//         where: { name: e }
-//       });
-//     });
-//     const dietFind = await Diet.findAll();
-//     res.send(dietFind);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-module.exports = router;
+module.exports= router;
