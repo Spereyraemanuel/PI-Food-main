@@ -1,7 +1,7 @@
 const { Router } = require('express');
-const recipeRouter = Router();
-// const { Recipe, TypeDiet} = require("../db")
-const {getApiInfo} = require("../controllers/recipeController")
+const recipesRouter = Router();
+// const { Recipe, TypeDiet } = require('../db');
+const { apiInfo } = require("../controllers/recipeController")
 
 recipeRouter.get("/", getApiInfo)
 
@@ -54,10 +54,6 @@ recipeRouter.get("/", getApiInfo)
 //       //si la receta no esta en la base de datos, que la obtenga desde la api;
 //       const apiRecipes = await getApiInfo(null, title);
 
-//       if(!apiRecipes || apiRecipes.length === 0){
-//         //si tampoco esta en la api que arroje un error 400
-//         res.status(400).json({message: "La receta no existe"})
-//       }
 
 //       res.status(200).json(apiRecipes);
 //     }
