@@ -1,17 +1,33 @@
+import { Route } from 'react-router-dom';
 import './App.css';
-import Details from './pages/detail/detail';
-import Form from './pages/form/form';
-import Home from './pages/home/home';
-import Landing from './pages/landing/landing';
-
+import { Home, Detail, Form, Landing } from "./pages"
+import NavBar from './components/NavBar/NavBar';
+import { useLocation } from 'react-router-dom';
 
 function App() {
+
+  const location = useLocation();
+
   return (
+
     <div className="App">
-      <Home></Home>
-      <Form></Form>
-      <Details></Details>
-      <Landing></Landing>
+      {location.pathname !== "/" && <NavBar />}
+      <Route path="/home">
+        <Home></Home>
+      </Route>
+
+      <Route path="/create">
+        <Form></Form>
+      </Route>
+
+      <Route path="/detail">
+        <Detail></Detail>
+      </Route>
+
+      <Route exact path="/">
+        <Landing></Landing>
+      </Route>
+
     </div>
   );
 }

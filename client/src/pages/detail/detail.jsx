@@ -1,4 +1,4 @@
-const Details = () => {
+const Detail = () => {
     return (
         <>
         <h1>Esta es la vista de details</h1>
@@ -6,4 +6,4 @@ const Details = () => {
     )
 }
 
-export default Details;
+export default Detail;
