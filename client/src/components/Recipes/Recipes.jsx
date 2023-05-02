@@ -1,7 +1,11 @@
-const Recipes = () => {
+import style from "./Recipes.module.css"
+
+const Recipes = (props) => {
     return(
-        <div>
-          
+        <div className={style.recipe}>
+          <p>Name:{props.name}</p>
+          <p>Image:{props.image}</p>
+          <p>HealthScore:{props.healthScore}</p>
         </div>
     )
 }
