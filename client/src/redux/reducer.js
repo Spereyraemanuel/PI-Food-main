@@ -1,9 +1,13 @@
+ import { GET_RECIPES } from "./actions";
+ 
  const initialState ={
     recipes: [],
  }
 
  const rootReducer = (state=initialState, action) => {
-   switch(action.type){
+   switch(action.type) {
+    case GET_RECIPES:
+     return {...state, recipes: action.payload};
     default:
         return {...state};
    }
