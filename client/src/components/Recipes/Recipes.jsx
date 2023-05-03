@@ -1,13 +1,14 @@
 import style from "./Recipes.module.css"
 
-const Recipes = (props) => {
+const Recipes = ({name, image, healthScore}) => {
     return(
         <div className={style.recipe}>
-          <p>Name:{props.name}</p>
-          <p>Image:{props.image}</p>
-          <p>HealthScore:{props.healthScore}</p>
+          <p>Name:{name}</p>
+          <p>Image:{image}</p>
+          <p>HealthScore:{healthScore}</p>
         </div>
     )
 }
+
 
 export default Recipes
