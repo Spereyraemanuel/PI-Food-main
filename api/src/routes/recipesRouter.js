@@ -15,11 +15,11 @@ router.get('/', async (req, res, next) => {
     if (name) {
       const resultFind = dbRecipes.filter((e) => e.name.toLowerCase().includes(name.toLowerCase()));
       if (resultFind.length === 0) {
-        return res.status(404).send({ message: 'No recipes found' });
+        return res.status(404).json({ message: 'No recipes found' });
       }
-      return res.send(resultFind);
+      return res.status(200).json(resultFind);
     } else {
-      return res.send(dbRecipes);
+      return res.status(200).json(dbRecipes);
     }
   } catch (error) {
     next(error);

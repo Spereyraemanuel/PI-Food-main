@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getRecipes } from "../../redux/actions";
-import Recipes from "../../components/Recipes/Recipes";
+import RecipesContainter from "../../components/RecipesCointeiner/RecipesContainer";
 
 
 
@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <>
         <h1>Esta es la vista de home</h1>
-        <Recipes />
+        <RecipesContainter />
         </>
     )
 }

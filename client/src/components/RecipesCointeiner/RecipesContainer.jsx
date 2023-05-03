@@ -5,7 +5,7 @@ import { useSelector }  from "react-redux"
 const RecipesContainter = () => {
 
     const infoRecipes = useSelector(state=>state.recipes)
-     
+     console.log(infoRecipes)
     return(
         <div className={style.container}>
           {infoRecipes.map(recipe=>{
