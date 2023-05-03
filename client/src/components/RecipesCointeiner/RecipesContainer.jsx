@@ -3448,7 +3448,7 @@ const RecipesContainter = () => {
         }
       ]
     // const infoRecipes = useSelector(state=>state.recipes)
-
+     
     return(
         <div className={style.container}>
           {infoRecipes.map(recipe=>{
