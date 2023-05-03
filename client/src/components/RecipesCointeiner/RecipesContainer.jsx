@@ -1,6 +1,6 @@
 import Recipes from "../Recipes/Recipes"
 import style from "./RecipesContainer.module.css"
-import {useSelector}  from "react-redux"
+import { useSelector }  from "react-redux"
 
 const RecipesContainter = () => {
     // const infoRecipes = [
