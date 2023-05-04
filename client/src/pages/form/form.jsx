@@ -1,26 +1,33 @@
-// import { useState } from "react";
 
-
-//   const [form, setForm] = useState({
-    //      recipe:"",
-    //      summary:"",
-    //      diets:""
-    //   })
-    
-    const Form = () => {
+const Form = () => {
     return (
         <Form>
             <div>
-                <label htmlFor="recipe">Recipe</label>
-                <input type="text" /*value={form.recipe}*/ />
+                <label htmlFor="">Name</label>
+                <input type="text" />
             </div>
             <div>
-                <label htmlFor="summary">Summary</label>
-                <input type="text" /* value={form.summary}*/ />
+                <label htmlFor="">Summary</label>
+                <input type="text" />
             </div>
             <div>
-                <label htmlFor="diets">Diets</label>
-                <input type="text" /*value={form.diets}*/ />
+                <label htmlFor="">HealtScore</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label htmlFor="">Steps</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label htmlFor="">Image</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label htmlFor="">diets</label>
+                <input type="text" />
+            </div>
+            <div>
+                <button>Create recipe</button>
             </div>
         </Form>
     )
