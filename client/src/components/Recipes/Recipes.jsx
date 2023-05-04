@@ -1,12 +1,12 @@
 import style from "./Recipes.module.css"
 
-const Recipes = ({id,name,summary,image,healthScore}) => {
-  console.log(id)
+const Recipes = ({name,image,diets}) => {
     return(
         <div className={style.recipe}>
-          <p>id:{id}</p>
-          <p>Name:{name}</p>
-          <p>HealthScore:{healthScore}</p>
+          <img className={style.images} src={image} alt="img" />
+          <h4 className={style.nombres}>{name}</h4>
+          <h5 className={style.dietas} >diets:</h5>
+          <p className={style.dietas2}> {diets}</p>
         </div>
     )
 }

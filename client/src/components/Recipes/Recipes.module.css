@@ -1,7 +1,32 @@
 .recipe{
-    border: 1px solid black;
-    width: fit-content;
-    height: fit-content;
-    border-radius: 10px;
-   
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.images{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 1em;
+    margin-bottom: 10px;
+}
+
+.dietas{
+    margin: 0;
+    padding: 0;
+}
+
+.nombres{
+    margin: 0;
+    padding: 0;
+}
+
+.dietas2{
+    margin: 0;
+    padding:0;
 }

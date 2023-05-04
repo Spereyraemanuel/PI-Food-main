@@ -11,7 +11,7 @@ const Home = () => {
 
     useEffect(()=>{
      dispatch(getRecipes());
-    },[])
+    },[dispatch])
     return (
         <>
         <h1>Esta es la vista de home</h1>

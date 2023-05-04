@@ -10,12 +10,12 @@ const RecipesContainter = () => {
         <div className={style.container}>
           {infoRecipes.map(recipe=>{
             return <Recipes
-               id={recipe.id}
+             key={recipe.id}
                name={recipe.name}
                summary={recipe.summary}
                image={recipe.image}
                healthScore={recipe.healthScore}
-
+               diets={recipe.diets}
             />
           })}
           
