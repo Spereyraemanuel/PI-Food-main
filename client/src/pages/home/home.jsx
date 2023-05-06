@@ -4,6 +4,7 @@ import { getRecipes } from "../../redux/actions";
 import RecipesContainter from "../../components/RecipesCointeiner/RecipesContainer";
 
 
+
 export default function Home() {
     const dispatch = useDispatch();
     useEffect(() => {

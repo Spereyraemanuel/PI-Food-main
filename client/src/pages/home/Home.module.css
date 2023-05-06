@@ -1,4 +1,3 @@
-.paginado {
-    display: flex;
-    justify-content: center;
+.fondo{
+    background: url("../../img/fondoHome.jpg");
 }

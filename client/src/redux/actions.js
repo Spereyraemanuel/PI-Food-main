@@ -45,7 +45,7 @@ export const getQueryRecipe = (name) => {
     return async function (dispatch) {
         try {
             dispatch(setLoading(true));
-            const response = await axios.get(`http://localhost:3001/recipe?name=${name}`);
+            const response = await axios.get(`http://localhost:3001/recipes?name=${name}`);
             dispatch({type:GET_RECIPES, payload:
             response.data})
         } catch (error) {
