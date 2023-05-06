@@ -12,7 +12,7 @@ export default function Home() {
     }, [dispatch])
 
     return (
-        <div>
+        <div >
             <div>
                 <h1>Esta es la vista de home</h1>
                 <RecipesContainter />

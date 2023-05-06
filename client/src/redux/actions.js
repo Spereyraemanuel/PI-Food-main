@@ -99,7 +99,7 @@ export const filterbyOrigin = (origin) => {
     };
 };
 
-export const healtScoreOrder = (score) => {
+export const healthScoreOrder = (score) => {
     return {
         type: HEALTH_SCORE_ORDER,
         payload: score,
