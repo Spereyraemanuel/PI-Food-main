@@ -3,12 +3,19 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import validation from "./validation";
 import { addRecipe } from "../../redux/actions"
+import {getDiets} from "../../redux/actions"
+import { useEffect } from "react";
 
 
 
 export default function Form() {
-    const dispatch = useDispatch()
-    const  diets  = useSelector((state) => state);
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+     dispatch(getDiets());
+    },[dispatch])
+
+    const  { diets } = useSelector((state) => state);
     const [diet, setDiet] = useState([]);
     const [recipe, setRecipe] = useState({
         title: "",
@@ -56,11 +63,13 @@ export default function Form() {
     };
     const dietHandler = (event) => {
         if (event.target.value) {
-            setDiet([...diet, event.target.value]);
-            setRecipe({ ...recipe, diets: [...diet, event.target.value] });
+            setDiet([...diets, event.target.value]);
+            setRecipe({ ...recipe, diets: [...diets, event.target.value] });
             event.target.value = "Choose your diets 🥰"
         }
     };
+   
+
     const deleteDiet = (event) => {
         setDiet(diet.filter((d) => d !== event));
         setRecipe({
@@ -109,7 +118,7 @@ export default function Form() {
                     onChange={dietHandler}
                     name="diets"
                     defaultValue="Choose your diets 🥰">
-                    <option disbled value="Choose your diets 🥰">
+                    <option disabled value="Choose your diets 🥰">
                         Choose your diets 🥰
                     </option>
                     {mapDiets()}

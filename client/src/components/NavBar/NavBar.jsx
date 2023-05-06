@@ -1,14 +1,24 @@
-import { Link } from "react-router-dom";
 import style from "./NavBar.module.css"
+import { Link, useLocation } from "react-router-dom";
+import image from "../../img/toHomeLogo.png"
+import SearchBar from "../SearchBar/SearchBar"
 
-
-const NavBar = ()=> {
-    return(
-        <div className={style.mainContainer}>
-        <Link to="/home">HOME</Link>
-        <Link to="/create">FORM</Link>
+export default function NavBar() {
+    const location = useLocation();
+    return (
+        <div className={style.nav}>
+            <Link to="/home">HOME</Link>
+            <img src={image} alt="toHome" />
+            <br />
+            <div className={style.botones}>
+                <Link to="/create">
+                {location.pathname === "/create" || <button>New Recipe</button>}
+                </Link>
+                <div className={style.searchbar}>
+            {location.pathname !== "/create" ? <SearchBar /> : null}
+             </div>
+            </div>
         </div>
     )
 }
 
-export default NavBar;
