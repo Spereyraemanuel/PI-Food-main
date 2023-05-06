@@ -7,8 +7,9 @@ export default function NavBar() {
     const location = useLocation();
     return (
         <div className={style.nav}>
-            <Link to="/home">HOME</Link>
+            <Link to="/home">
             <img src={image} alt="toHome" />
+            </Link>
             <br />
             <div className={style.botones}>
                 <Link to="/create">

@@ -4,7 +4,7 @@ import { getRecipes, getQueryRecipe } from "../../redux/actions";
 import style from "./SearchBar.module.css";
 
 
-export default function SearchBar (props){
+export default function SearchBar (){
     const [input, setInput] = useState('');
     const dispatch = useDispatch()
     
