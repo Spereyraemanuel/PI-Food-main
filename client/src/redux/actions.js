@@ -90,10 +90,10 @@ export const getDiets = () => {
     };
 };
 
-export const filterRecipeByDiets = (dieta) => {
+export const filterRecipeByDiets = (diets) => {
     return {
         type: FILTER_BY_DIETS,
-        payload: dieta,
+        payload: diets,
     };
 };
 
