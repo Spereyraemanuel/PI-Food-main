@@ -28,14 +28,6 @@ export function prevPage(){
     }
 }
 
-export const setLoading = (isLoading) => {
-    return {
-      type: SET_LOADING,
-      payload: isLoading,
-    };
-  };
-
-
 export const addRecipe = (recipe) => {
     return async function (dispatch) {
         try {
@@ -71,7 +63,6 @@ export const getQueryRecipe = (name) => {
 export const getDetail = (id) => {
     return async function (dispatch) {
         try {
-            dispatch(setLoading(true));
             const response = await axios.get(`http://localhost:3001/recipes/${id}`)
             dispatch({type: GET_DETAIL_RECIPE, payload: response.data});
             dispatch(setLoading(false));

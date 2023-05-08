@@ -19,7 +19,6 @@ import {
 const initialState = {
   recipes: [],
   myRecipes: [],
-  loading: false,
   detail: {},
   diets: [],
   numPage: 1
@@ -31,11 +30,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: action.payload
-      };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: action.payload,
       };
     case ADD_RECIPE:
       return {

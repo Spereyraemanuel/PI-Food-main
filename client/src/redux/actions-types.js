@@ -1,5 +1,4 @@
 export const GET_RECIPES = "GET_RECIPES";
-export const SET_LOADING = "SET_LOADING";
 export const ADD_RECIPE = "ADD_RECIPE";
 export const GET_QUERY_RECIPE = "GET_QUERY_RECIPE";
 export const GET_DIETS = "GET_DIETS";
