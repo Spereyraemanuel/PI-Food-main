@@ -12,6 +12,7 @@ import {
   CLEAN_STATES,
   NEXT_PAGE,
   PREV_PAGE,
+  DELETE_FILTERS,
 } from "./actions-types";
 
 
@@ -103,7 +104,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         myRecipes: filtered
       };
-    case "DELETE_FILTERS":
+    case DELETE_FILTERS:
       return {
         ...state,
         myRecipes: state.recipes

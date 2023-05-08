@@ -11,3 +11,4 @@ export const HEALTH_SCORE_ORDER = "HEALTH_SCORE_ORDER";
 export const CLEAN_STATES = "CLEAN_STATES"
 export const NEXT_PAGE = "NEXT_PAGE"
 export const PREV_PAGE = "PREV_PAGE"
+export const DELETE_FILTERS = "DELETE_FILTERS"

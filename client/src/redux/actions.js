@@ -12,6 +12,7 @@ import {
     CLEAN_STATES,
     NEXT_PAGE,
     PREV_PAGE,
+    DELETE_FILTERS,
   } from "./actions-types";
 
 
@@ -121,7 +122,7 @@ export const healthScoreOrder = (score) => {
 
 export const deleteFilter = () => {
     return {
-        type: "DELETE_FILTERS"
+        type: DELETE_FILTERS,
     };
 };
 

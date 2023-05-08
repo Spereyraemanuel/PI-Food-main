@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Landing from "./pages/landing/Landing"
+import Detail from "./pages/detail/Detail"
 import Home from "./pages/home/Home"
 import Form from "./pages/form/Form"
 import NavBar from './components/NavBar/NavBar';
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Landing />} />;
         <Route path="/home" element={<Home />} />;
-        <Route path="/detailrecipe/:idRecipe" />;
+        <Route path="/detail/:idRecipe" element={<Detail />} />;
         <Route path="/create" element={<Form />} />;
       </Routes>
      
