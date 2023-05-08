@@ -54,12 +54,12 @@ export default function Form() {
     };
     const mapDiets = () => {
         const filtered = diets.filter((d) => !diet.includes(d.name));
-        console.log(filtered)
         return filtered.map((di, i) => {
             return (
-                <option value={di.name} key={i}>
-                    {di.name}</option>
+                <option value={di} key={i}>
+                    {di}</option>
             );
+            
         });
     };
     const dietHandler = (event) => {

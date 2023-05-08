@@ -14,7 +14,7 @@ import {
 
 
 export default function Home() {
-    const { diets, myRecipes, loading } = useSelector((state) => state);
+    // const { diets } = useSelector((state) => state);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -32,9 +32,6 @@ export default function Home() {
             dispatch(getDiets(value));
         } else {
             dispatch(filterbyOrigin(value));
-        }
-        if (value === "All") {
-            dispatch(deleteFilter())
         }
     };
 
@@ -60,17 +57,17 @@ export default function Home() {
                     <option value="Api">Api</option>
                     <option value="DataBase">DataBase</option>
                 </select>
-                <select name="Diets" onChange={filterHandler} defaultValue='Filter By Diets'>
+                {/* <select name="Diets" onChange={filterHandler} defaultValue='Filter By Diets'>
           <option disabled >Filter By</option>
           <option value="Diets">Diets</option>
-          {diets.map((diet) => {
+          {diets?.map((diet) => {
             return (
-              <option value={diet.name} key={diet.id}>
-                {diet.name}
+              <option key={diet.id}>
+                {diet}
               </option>
             );
           })}
-        </select>
+        </select> */}
                 <select name="Alphabetic" onChange={orderHandler} defaultValue='Alphabetic Order'>
                     <option disabled >Order By</option>
                     <option value="A-Z">A-Z</option>
