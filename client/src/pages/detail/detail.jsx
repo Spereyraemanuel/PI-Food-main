@@ -17,7 +17,7 @@ export default function DetailRecipe(){
 
     return (
         <div className={style.container}>
-            <Link to="/home">
+            <Link>
             <button className={style.back}>⬅</button>
             </Link>
             {loading ? <div className={style.loader}>

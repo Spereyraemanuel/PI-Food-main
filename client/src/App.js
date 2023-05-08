@@ -1,6 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Home, Detail, Form, Landing } from "./pages"
+import Detail from "./pages/detail/Detail"
+import Landing from "./pages/landing/Landing"
+import Home from "./pages/home/Home"
+import Form from "./pages/form/Form"
 import NavBar from './components/NavBar/NavBar';
 import { useLocation } from 'react-router-dom';
 

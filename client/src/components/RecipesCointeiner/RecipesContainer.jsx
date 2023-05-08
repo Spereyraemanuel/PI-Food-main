@@ -2,7 +2,7 @@ import Paginado from "../Paginado/Paginado"
 import Recipes from "../Recipes/Recipes"
 import style from "./RecipesContainer.module.css"
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom";
+
 
 const RecipesContainter = () => {
 
@@ -16,10 +16,7 @@ const RecipesContainter = () => {
 
   let viewRecipes = infoRecipes?.slice(init, finish)//solo mostrar 9 cartas
 
-   const navigate = useNavigate();
-   const toDetail = () => {
-     navigate(`/detailrecipe/${infoRecipes.id}`)
-   }
+
 
   return (
     <div className={style.container}>
@@ -27,8 +24,7 @@ const RecipesContainter = () => {
 
       </Paginado>
       {viewRecipes.map(recipe => {
-        return  <div onClick={toDetail}>
-          <Recipes
+        return <Recipes
           key={recipe.id}
           id={recipe.id}
           name={recipe.name}
@@ -37,7 +33,6 @@ const RecipesContainter = () => {
           healthScore={recipe.healthScore}
           diets={recipe.diets}
           />
-          </div>
       })}
       <Paginado cantPages={cantPages}>
 
