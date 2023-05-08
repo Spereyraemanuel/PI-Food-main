@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RecipesContainter from "../../components/RecipesCointeiner/RecipesContainer";
 import {
     getRecipes,
-    filterbyOrigin,
-    filterRecipeByDiets,
+    // filterbyOrigin,
     orderRecipeAlphabetic,
     healthScoreOrder,
     getDiets,
@@ -15,7 +14,7 @@ import {
 
 
 export default function Home() {
-    const { diets } = useSelector((state) => state);
+    const {diets} = useSelector((state) => state);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -29,17 +28,17 @@ export default function Home() {
         }
     })
 
-    const filterHandler = (event) => {
-        const { name, value } = event.target;
-        if (name === "Diets") {
-            dispatch(filterRecipeByDiets(value));
-        } else {
-            dispatch(filterbyOrigin(value));
-        }
-        if (value === "All") {
-            dispatch(deleteFilter())
-        }
-    };
+    // const filterHandler = (event) => {
+    //     const { name, value } = event.target;
+    //     if (name === "diets") {
+    //         dispatch(getDiets(value));
+    //     } else {
+    //         dispatch(filterbyOrigin(value));
+    //     }
+    //     if (value === "All") {
+    //         dispatch(deleteFilter())
+    //     }
+    // };
 
     const orderHandler = (event) => {
         const { name, value } = event.target;
@@ -57,28 +56,12 @@ export default function Home() {
         <div >
             <div>
                 <h1>Esta es la vista de home</h1>
-                <select name="Origin" onChange={filterHandler} defaultValue="Filter by origin">
+                {/* <select name="Origin" onChange={filterHandler} defaultValue="Filter by origin">
                     <option disabled >Filter By</option>
                     <option value="All">All</option>
                     <option value="Api">Api</option>
                     <option value="DataBase">DataBase</option>
-                </select>
-                <select name="Diets" onChange={filterHandler} defaultValue="Filter by Diets">
-                    <option disabled >Filter By</option>
-                    <option value="All">All</option>
-                    {diets?.map((diet) => {
-                        return (
-                            <option value={diet.name} key={diet.id}>
-                                {diet.name}
-                            </option>
-                        );
-                    })}
-                </select>
-            <select name="Alphabetic" onChange={orderHandler} defaultValue="AlphabeticOrder">
-            <option disabled>Order By</option>
-            <option value="A-Z">A-Z</option>
-            <option value="Z-A">Z-A</option>
-            </select>
+                </select> */}
             <select name="HealthScore" onChange={orderHandler} defaultValue="HealthScore">
             <option disabled> Order by</option>
             <option value="Ascendente">Ascendente</option>

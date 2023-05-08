@@ -10,9 +10,21 @@ import {
     SET_LOADING,
     GET_DETAIL_RECIPE,
     CLEAN_STATES,
+    NEXT_PAGE,
+    PREV_PAGE,
   } from "./actions-types";
 
+export function nextPage(){
+    return{
+    type: NEXT_PAGE,
+    };
+}
 
+export function prevPage(){
+    return{
+     type: PREV_PAGE
+    }
+}
 
 export const setLoading = (isLoading) => {
     return {

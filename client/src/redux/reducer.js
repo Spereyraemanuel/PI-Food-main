@@ -10,6 +10,8 @@ import {
   SET_LOADING,
   GET_DETAIL_RECIPE,
   CLEAN_STATES,
+  NEXT_PAGE,
+  PREV_PAGE,
 } from "./actions-types";
 
 
@@ -19,6 +21,7 @@ const initialState = {
   loading: false,
   detail: {},
   diets: [],
+  numPage: 1
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -39,6 +42,16 @@ const rootReducer = (state = initialState, action) => {
         myRecipes: [...state.myRecipes, action.payload],
         recipes: [...state.recipes, action.payload]
       };
+      case NEXT_PAGE:
+        return{
+          ...state,
+          numPage: state.numPage + 1
+        }
+        case PREV_PAGE:
+          return{
+            ...state,
+            numPage: state.numPage - 1
+          }
     case GET_QUERY_RECIPE:
       return {
         ...state,
