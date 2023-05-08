@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Detail from "./pages/detail/Detail"
+import DetailRecipe from "./pages/detail/Detail"
 import Landing from "./pages/landing/Landing"
 import Home from "./pages/home/Home"
 import Form from "./pages/form/Form"
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Landing />} />;
         <Route path="/home" element={<Home />} />;
-        <Route path="/detailrecipe/:idRecipe" element={<Detail />} />;
+        <Route path="/detailrecipe/:idRecipe" element={<DetailRecipe />} />;
         <Route path="/create" element={<Form />} />;
       </Routes>
      
