@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import DetailRecipe from "./pages/detail/Detail"
 import Landing from "./pages/landing/Landing"
 import Home from "./pages/home/Home"
 import Form from "./pages/form/Form"
@@ -10,15 +9,13 @@ import { useLocation } from 'react-router-dom';
 function App() {
 
   const location = useLocation();
-
   return (
-
     <div className="App">
       {location.pathname !== "/" && <NavBar />}
       <Routes>
         <Route exact path="/" element={<Landing />} />;
         <Route path="/home" element={<Home />} />;
-        <Route path="/detailrecipe/:idRecipe" element={<DetailRecipe />} />;
+        <Route path="/detailrecipe/:idRecipe" />;
         <Route path="/create" element={<Form />} />;
       </Routes>
      
