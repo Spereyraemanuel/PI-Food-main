@@ -7,7 +7,6 @@ import {
     FILTER_BY_ORIGIN,
     HEALTH_SCORE_ORDER,
     ALPHABETIC_ORDER,
-    SET_LOADING,
     GET_DETAIL_RECIPE,
     CLEAN_STATES,
     NEXT_PAGE,
@@ -50,7 +49,6 @@ export const getRecipes = () => {
 export const getQueryRecipe = (name) => {
     return async function (dispatch) {
         try {
-            dispatch(setLoading(true));
             const response = await axios.get(`http://localhost:3001/recipes?name=${name}`);
             dispatch({type:GET_RECIPES, payload:
             response.data})
@@ -65,7 +63,6 @@ export const getDetail = (id) => {
         try {
             const response = await axios.get(`http://localhost:3001/recipes/${id}`)
             dispatch({type: GET_DETAIL_RECIPE, payload: response.data});
-            dispatch(setLoading(false));
         } catch (error) {
             alert("No existe la receta con el ID indicado");
         }
