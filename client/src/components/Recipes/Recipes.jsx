@@ -11,7 +11,7 @@ const Recipes = ({id,name,image,diets, healthScore}) => {
           </Link>
           <h4 className={style.nombres}>{name}</h4>
           <h5 className={style.dietas} >diets:</h5>
-          <p className={style.dietas2}> {diets}</p>
+          <p className={style.dietas2}>{`${diets }`} </p>
           <h5 className={style.hs}> healthScore: { healthScore}</h5>
         </div>
     )
