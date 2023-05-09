@@ -54,7 +54,7 @@ export default function Home() {
     };
 
     return (
-        <div >
+        <div>
             <div>
                 <select name="Origin" onChange={filterHandler} defaultValue="Filter by origin">
                     <option disabled >Filter By</option>
@@ -63,7 +63,7 @@ export default function Home() {
                     <option value="DataBase">DataBase</option>
                 </select>
                 <select onClick={handleOrderAlphabetic} defaultValue="Filter by Alphabetetic" onChange={(e) => setOption(e.target.value)}>
-                    <option disabled >Order by Alphabetic</option>
+                    <option disabled>Order by Alphabetic</option>
                     <option value="A-Z">A-Z</option>
                     <option value="Z-A">Z-A</option>
                 </select>
@@ -72,17 +72,15 @@ export default function Home() {
                     <option value="Ascendente">Ascendente</option>
                     <option value="Descendente">Descendente</option>
                 </select>
-                <select defaultValue="Filter by diets" onClick={handleFilterByDiets} value={selectedDiets} onChange={(e) => setSelectedDiets(Array.from(e.target.selectedOptions, (option) => option.value))}>
+                <select multiple={true} onClick={handleFilterByDiets} value={selectedDiets} onChange={(e) => setSelectedDiets(Array.from(e.target.selectedOptions, (option) => option.value))}>
                     {diets.map((diet) => (
                         <option key={diet} value={diet}>
                             {diet}
                         </option>
                     ))}
                 </select>
-
-               
+                <button onClick={handleClearFilters}>Delete filters</button>
             </div>
-            <button onClick={handleClearFilters}>Delete filters</button>
             <br />
             <RecipesContainter />
         </div>
