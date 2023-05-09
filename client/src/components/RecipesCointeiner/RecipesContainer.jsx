@@ -8,7 +8,7 @@ import { useState } from "react"
 const RecipesContainter = () => {
 
   const infoRecipes = useSelector(state => state.recipes);
-
+console.log(infoRecipes)
   const [page, setPage] = useState(1)
  const finalPage = page * 9
  const startPage = finalPage - 9

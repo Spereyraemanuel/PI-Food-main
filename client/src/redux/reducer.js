@@ -8,7 +8,7 @@ import {
   HEALTH_SCORE_ORDER,
   ALPHABETIC_ORDER,
   GET_DETAIL_RECIPE,
-  CLEAN_STATES,
+  DELETE_FILTERS,
 } from "./actions-types";
 
 
@@ -49,25 +49,41 @@ const rootReducer = (state = initialState, action) => {
         detail: action.payload,
       };
     case FILTER_BY_DIETS:
-      const AllrecipesFiltered = state.recipes.filter((recipe) => recipe.diets.includes(action.payload));
+      const selectedDiets = action.payload; // Dietas seleccionadas desde la acción
+      // Filtrar las recetas según las dietas seleccionadas
+      const filteredRecipes = state.recipes.filter((recipe) => {
+        // Si no hay dietas seleccionadas, mostrar todas las recetas
+        if (selectedDiets.length === 0) {
+          return true;
+        }
+        // Si la receta tiene alguna de las dietas seleccionadas, mostrarla
+        return selectedDiets.every((diet) => recipe.diets.includes(diet));
+      });
       return {
         ...state,
-        myRecipes: AllrecipesFiltered,
+        recipes: filteredRecipes, // Actualizar el estado recipes con las recetas filtradas
       };
-    case ALPHABETIC_ORDER:
-      return {
-        ...state,
-        myRecipes:
-          action.payload === "A-Z"
-            ? state.myRecipes.sort((a, b) => a.title.localeCompare(b.tittle))
-            : state.myRecipes.sort((a, b) => b.title.localeCompare(a.title)),
-      };
+      case ALPHABETIC_ORDER:
+        const sortedRecipes = [...state.recipes]; // Copia del array de recetas
+        sortedRecipes.sort((a, b) =>
+            action.payload === 'A-Z'
+                ? a.name.localeCompare(b.name)
+                : b.name.localeCompare(a.name)
+        );
+        return {
+            ...state,
+            recipes: sortedRecipes,
+        };
     case HEALTH_SCORE_ORDER:
       return {
         ...state,
-        myRecipes:
-          action.payload === "Ascendente"
-            ? state.myRecipes.sort((a, b) => (a.healthScore < b.healthScore ? -1 : 1)) : state.myRecipes.sort((a, b) => (a.healthScore > b.healthScore ? -1 : 1)),
+        recipes: state.recipes.slice().sort((a, b) => {
+          if (action.payload === "Ascendente") {
+            return a.healthScore - b.healthScore;
+          } else {
+            return b.healthScore - a.healthScore;
+          }
+        })
       };
     case FILTER_BY_ORIGIN:
       const filtered = state.myRecipes.filter((recipe) => {
@@ -88,10 +104,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recipes: filtered
       };
-    case CLEAN_STATES:
+    case DELETE_FILTERS:
       return {
         ...state,
-        detail: {}
+        recipes: initialState.recipes, // Restablecer al estado inicial de las recetas
       };
     default:
       return { ...state };

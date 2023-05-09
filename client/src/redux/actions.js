@@ -8,7 +8,6 @@ import {
     HEALTH_SCORE_ORDER,
     ALPHABETIC_ORDER,
     GET_DETAIL_RECIPE,
-    CLEAN_STATES,
     DELETE_FILTERS,
   } from "./actions-types";
 
@@ -94,16 +93,9 @@ export const healthScoreOrder = (score) => {
     };
 };
 
-export const deleteFilter = (origin) => {
+export const clearFilters = () => {
     return {
-        type: DELETE_FILTERS,
-        payload:origin
+      type: DELETE_FILTERS,
     };
-};
+  };
 
-export const cleanStates = (origin) => {
-    return {
-        type: CLEAN_STATES,
-        payload:origin
-    }
-};

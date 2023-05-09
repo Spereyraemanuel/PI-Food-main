@@ -1,24 +1,33 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import RecipesContainter from "../../components/RecipesCointeiner/RecipesContainer";
 import {
     getRecipes,
     filterbyOrigin,
     orderRecipeAlphabetic,
-    healthScoreOrder,
     getDiets,
-    cleanStates,
+    clearFilters,
+    healthScoreOrder,
+    filterRecipeByDiets
 } from "../../redux/actions"
 
 
 
-export default function Home() {
-    // const { diets } = useSelector((state) => state);
 
+
+export default function Home() {
     const dispatch = useDispatch();
+    const [option, setOption] = useState('');
+    const [selectedDiets, setSelectedDiets] = useState([]);
+    const { diets } = useSelector((state) => state);
+
+    const handleFilterByDiets = () => {
+        dispatch(filterRecipeByDiets(selectedDiets));
+    };
+
     useEffect(() => {
         dispatch(getRecipes());
-        dispatch(cleanStates())
+        dispatch(clearFilters())
     }, [dispatch]);
 
     useEffect(() => {
@@ -32,17 +41,17 @@ export default function Home() {
         }
     };
 
-    const orderHandler = (event) => {
-        const { name, value } = event.target;
-        if (name === "Alphabetic") {
-            dispatch(orderRecipeAlphabetic(value));
-        } else {
-            dispatch(healthScoreOrder(value));
-        }
+    const handleOrderAlphabetic = () => {
+        dispatch(orderRecipeAlphabetic(option));
     };
-    const reset = () => {
-        dispatch(cleanStates())
-    }
+
+    const handleHealthScoreOrder = (event) => {
+        const selectedOption = event.target.value;
+        dispatch(healthScoreOrder(selectedOption));
+    };
+    const handleClearFilters = () => {
+        dispatch(getRecipes());
+    };
 
     return (
         <div >
@@ -53,31 +62,29 @@ export default function Home() {
                     <option value="Api">Api</option>
                     <option value="DataBase">DataBase</option>
                 </select>
-                {/* <select name="Diets" onChange={filterHandler} defaultValue='Filter By Diets'>
-                    <option disabled >Filter By</option>
-                    <option value="Diets">Diets</option>
-                    {diets?.map((diet) => {
-                        return (
-                            <option key={diet.id}>
-                                {diet}
-                            </option>
-                        );
-                    })}
-                </select> */}
-                {/* <select name="Alphabetic" onChange={orderHandler} defaultValue='Alphabetic Order'>
-                    <option disabled >Order By</option>
+                <select onClick={handleOrderAlphabetic} defaultValue="Filter by Alphabetetic" onChange={(e) => setOption(e.target.value)}>
+                    <option disabled >Order by Alphabetic</option>
                     <option value="A-Z">A-Z</option>
                     <option value="Z-A">Z-A</option>
-                </select> */}
-                <select name="HealthScore" onChange={orderHandler} defaultValue="HealthScore">
-                    <option disabled> Order by</option>
-                    <option value="Ascendente">Ascendente</option>
-                    <option value="Decendente">Decendente</option>
                 </select>
-                <button onClick={reset}>Reset</button>
-                <br />
-                <RecipesContainter />
+                <select defaultValue="Filter by healthScore" onChange={handleHealthScoreOrder}>
+                    <option disabled>order by healthScore</option>
+                    <option value="Ascendente">Ascendente</option>
+                    <option value="Descendente">Descendente</option>
+                </select>
+                <select defaultValue="Filter by diets" onClick={handleFilterByDiets} value={selectedDiets} onChange={(e) => setSelectedDiets(Array.from(e.target.selectedOptions, (option) => option.value))}>
+                    {diets.map((diet) => (
+                        <option key={diet} value={diet}>
+                            {diet}
+                        </option>
+                    ))}
+                </select>
+
+               
             </div>
+            <button onClick={handleClearFilters}>Delete filters</button>
+            <br />
+            <RecipesContainter />
         </div>
     )
 }
