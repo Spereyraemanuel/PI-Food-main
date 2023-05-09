@@ -12,17 +12,14 @@ const RecipesContainter = () => {
 
   let init = (numPage - 1) * 9
   let finish = numPage * 9
-  let cantPages = Math.floor(infoRecipes.length / 9)
-
+  let cantPages = Math.ceil(infoRecipes.length / 9)
+  
   let viewRecipes = infoRecipes?.slice(init, finish)//solo mostrar 9 cartas
 
 
 
   return (
     <div className={style.container}>
-      <Paginado cantPages={cantPages}>
-
-      </Paginado>
       {viewRecipes.map(recipe => {
         return <Recipes
           key={recipe.id}
@@ -34,8 +31,8 @@ const RecipesContainter = () => {
           diets={recipe.diets}
           />
       })}
-      <Paginado cantPages={cantPages}>
-
+      <Paginado viewRecipes={viewRecipes} cantPages={cantPages}>
+       
       </Paginado>
     </div>
   )

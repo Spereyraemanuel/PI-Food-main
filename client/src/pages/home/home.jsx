@@ -28,9 +28,7 @@ export default function Home() {
 
     const filterHandler = (event) => {
         const { name, value } = event.target;
-        if (name === "Diets") {
-            dispatch(getDiets(value));
-        } else {
+        if (name === "Origin") {
             dispatch(filterbyOrigin(value));
         }
     };
@@ -58,16 +56,16 @@ export default function Home() {
                     <option value="DataBase">DataBase</option>
                 </select>
                 {/* <select name="Diets" onChange={filterHandler} defaultValue='Filter By Diets'>
-          <option disabled >Filter By</option>
-          <option value="Diets">Diets</option>
-          {diets?.map((diet) => {
-            return (
-              <option key={diet.id}>
-                {diet}
-              </option>
-            );
-          })}
-        </select> */}
+                    <option disabled >Filter By</option>
+                    <option value="Diets">Diets</option>
+                    {diets?.map((diet) => {
+                        return (
+                            <option key={diet.id}>
+                                {diet}
+                            </option>
+                        );
+                    })}
+                </select> */}
                 <select name="Alphabetic" onChange={orderHandler} defaultValue='Alphabetic Order'>
                     <option disabled >Order By</option>
                     <option value="A-Z">A-Z</option>

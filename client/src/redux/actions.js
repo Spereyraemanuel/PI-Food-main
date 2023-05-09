@@ -95,6 +95,7 @@ export const orderRecipeAlphabetic = (option) => {
 };
 
 export const filterbyOrigin = (origin) => {
+    console.log(origin, "esto es origin")
     return {
         type: FILTER_BY_ORIGIN,
         payload: origin,

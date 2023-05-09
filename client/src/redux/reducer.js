@@ -28,7 +28,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_RECIPES:
       return {
         ...state,
-        recipes: action.payload
+        recipes: action.payload,
+        myRecipes: action.payload
       };
     case ADD_RECIPE:
       return {
@@ -83,19 +84,23 @@ const rootReducer = (state = initialState, action) => {
             ? state.myRecipes.sort((a, b) => (a.healthScore < b.healthScore ? -1 : 1)) : state.myRecipes.sort((a, b) => (a.healthScore > b.healthScore ? -1 : 1)),
       };
     case FILTER_BY_ORIGIN:
-      const filtered = state.recipes.filter((recipe) => {
+      const filtered = state.myRecipes.filter((recipe) => {
         const regExp = /^[0-9]+$/;
         if (action.payload === "Api" && regExp.test(recipe.id)) {
           return true;
         } else if (action.payload === "DataBase" && !regExp.test(recipe.id)) {
           return true;
-        } else {
+        }
+        else if (action.payload === "All") {
+          return true;
+        }else {
           return false;
         }
       })
+      
       return {
         ...state,
-        myRecipes: filtered
+        recipes: filtered
       };
     case DELETE_FILTERS:
       return {

@@ -160,8 +160,9 @@ export default function Form() {
                 <h3>{recipe.name}</h3>
                 <br />
                 {recipe.diets?.map((diet) => {
+                    console.log(diet)
                     return (
-                        <div className={style.diets}>
+                        <div key={diet} className={style.diets}>
                             <span className={style.diet}>{diet.charAt(0).toUpperCase() + diet.slice(1)}
                             </span>
                         </div>
