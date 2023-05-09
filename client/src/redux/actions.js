@@ -95,7 +95,6 @@ export const orderRecipeAlphabetic = (option) => {
 };
 
 export const filterbyOrigin = (origin) => {
-    console.log(origin, "esto es origin")
     return {
         type: FILTER_BY_ORIGIN,
         payload: origin,
@@ -109,14 +108,16 @@ export const healthScoreOrder = (score) => {
     };
 };
 
-export const deleteFilter = () => {
+export const deleteFilter = (origin) => {
     return {
         type: DELETE_FILTERS,
+        payload:origin
     };
 };
 
-export const cleanStates = () => {
+export const cleanStates = (origin) => {
     return {
-        type: CLEAN_STATES
+        type: CLEAN_STATES,
+        payload:origin
     }
 };

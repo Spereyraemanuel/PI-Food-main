@@ -7,7 +7,6 @@ import {
     orderRecipeAlphabetic,
     healthScoreOrder,
     getDiets,
-    deleteFilter,
     cleanStates,
 } from "../../redux/actions"
 
@@ -42,13 +41,12 @@ export default function Home() {
         }
     };
     const reset = () => {
-        dispatch(deleteFilter())
+        dispatch(cleanStates())
     }
 
     return (
         <div >
             <div>
-                <h1>Esta es la vista de home</h1>
                 <select name="Origin" onChange={filterHandler} defaultValue="Filter by origin">
                     <option disabled >Filter By</option>
                     <option value="All">All</option>
@@ -66,11 +64,11 @@ export default function Home() {
                         );
                     })}
                 </select> */}
-                <select name="Alphabetic" onChange={orderHandler} defaultValue='Alphabetic Order'>
+                {/* <select name="Alphabetic" onChange={orderHandler} defaultValue='Alphabetic Order'>
                     <option disabled >Order By</option>
                     <option value="A-Z">A-Z</option>
                     <option value="Z-A">Z-A</option>
-                </select>
+                </select> */}
                 <select name="HealthScore" onChange={orderHandler} defaultValue="HealthScore">
                     <option disabled> Order by</option>
                     <option value="Ascendente">Ascendente</option>
