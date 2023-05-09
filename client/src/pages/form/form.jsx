@@ -18,7 +18,7 @@ export default function Form() {
     const  { diets } = useSelector((state) => state);
     const [diet, setDiet] = useState([]);
     const [recipe, setRecipe] = useState({
-        title: "",
+        name: "",
         image: "",
         summary: "",
         healthScore: 1,
@@ -26,7 +26,7 @@ export default function Form() {
         diets: [],
     });
     const [error, setError] = useState({
-        title: "",
+        name: "",
         image: "",
         summary: "",
         healthScore: 1,
@@ -49,6 +49,7 @@ export default function Form() {
     const handlerSubmit = (event) => {
         event.preventDefault();
         dispatch(addRecipe(recipe));
+        console.log(recipe)
         alert("✅Recipe created successfully!!✅");
         
     };
@@ -81,13 +82,13 @@ export default function Form() {
     return (
         <div className={style.container}>
             <form onSubmit={handlerSubmit}>
-                <label> Title: </label>
+                <label> Name recipe: </label>
                 <input type="text"
-                    name="title"
-                    value={recipe.title}
+                    name="name"
+                    value={recipe.name}
                     onChange={inputChange}
                 />
-                {error.title && <p className={style.error}></p>}
+                {error.name && <p className={style.error}></p>}
                 <label>Image: </label>
                 <input type="text"
                     name="image"
@@ -113,6 +114,14 @@ export default function Form() {
                     rows="10"
                     onChange={inputChange}
                 />
+                  <label>summary: </label>
+                <textarea
+                    type="text"
+                    name="summary"
+                    value={recipe.summary}
+                    rows="10"
+                    onChange={inputChange}
+                />
                 {error.steps && <p className={style.error}></p>}
                 <label>Diets: </label>
                 <select
@@ -125,7 +134,7 @@ export default function Form() {
                     {mapDiets()}
                 </select>
                 <div className={style.formDiets}>
-                    {diet?.map((d, i) => {
+                    {diets?.map((d, i) => {
                         return (
                             <button key={i} type="button"
                                 onDoubleClick={() => deleteDiet(d)}>
@@ -135,12 +144,12 @@ export default function Form() {
                     })}
                 </div>
                 {error.diets && <p className={style.error}>{error.diets}</p>}
-                {!error.title && !error.image &&
-                    !error.summary && !error.healthScore && !error.steps &&
+                {!error.name && !error.image &&
+                 !error.healthScore && !error.steps &&
                     diet.length >= 1 ? (
                     <button className={style.createButton}>Create</button>
                 ) : (
-                    <button disabled className={style.disabledButton}>
+                    <button  className={style.disabledButton}>
                         Create
                     </button>
                 )}
@@ -148,9 +157,9 @@ export default function Form() {
             <div className={style.card}>
                 <h6>{recipe.healthScore}</h6>
                 <img src={recipe.image} alt="" className={style.image} />
-                <h3>{recipe.title}</h3>
+                <h3>{recipe.name}</h3>
                 <br />
-                {recipe.diets.map((diet) => {
+                {recipe.diets?.map((diet) => {
                     return (
                         <div className={style.diets}>
                             <span className={style.diet}>{diet.charAt(0).toUpperCase() + diet.slice(1)}

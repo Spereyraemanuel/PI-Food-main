@@ -2,11 +2,11 @@ export default function validation(inputs) {
     const errors = {};
     const urlRegex = /(https?:\/\/.*\.(?:png|jpeg|jpg))/i; //Expresión regular para verificar una url solamente de imágenes
     const letraRegex = /^[A-Za-z\s]+$/; //Expresión regular para verificar que un texto no tenga números ni símbolos
-    if (!letraRegex.test(inputs.title)) {
-      errors.title = "El nombre no puede tener símbolos ni números";
+    if (!letraRegex.test(inputs.name)) {
+      errors.name = "El nombre no puede tener símbolos ni números";
     }
-    if (inputs.title.trim().length === 0) {
-      errors.title = "Campo obligatorio";
+    if (inputs.name.trim().length === 0) {
+      errors.name = "Campo obligatorio";
     }
     if (!urlRegex.test(inputs.image)) {
       errors.image = "URL no válida";

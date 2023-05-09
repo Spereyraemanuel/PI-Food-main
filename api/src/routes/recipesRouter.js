@@ -34,22 +34,28 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, summary, healthScore, image, steps,Diets} = req.body;
+    const { name, summary, healthScore, image, steps, diets} = req.body;
+   
     const newRecipe = await Recipe.create({
       name,
       summary,
       healthScore,
       image,
-      steps
+      steps,
+      
 });
-Diets.forEach(async e=>{
-  const agregar = await Diet.findAll({
-      where:{name: e}
-  })
-  //unir con la receta que recien creamos
-  await newRecipe.addDiets(agregar)
-})
-
+if (Array.isArray(diets)) {
+  for (const dietName of diets) {
+    const agregar = await Diet.findAll({
+      where: { name: dietName }
+    });
+    if (agregar.length > 0) {
+      await newRecipe.addDiets(agregar[0]);
+    }
+  }
+} else {
+  throw new Error("Diets must be an array.");
+}
     res.status(201).send(newRecipe);
   } catch (error) {
     res.status(400).json(error.message);
