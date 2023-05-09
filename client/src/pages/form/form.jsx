@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import validation from "./validation";
 import { addRecipe } from "../../redux/actions"
-import {getDiets} from "../../redux/actions"
+import { getDiets } from "../../redux/actions"
 import { useEffect } from "react";
 
 
@@ -11,12 +11,12 @@ import { useEffect } from "react";
 export default function Form() {
 
     const dispatch = useDispatch();
-    useEffect(()=>{
-     dispatch(getDiets());
-    },[dispatch])
+    useEffect(() => {
+        dispatch(getDiets());
+    }, [dispatch])
 
-    const  { diets } = useSelector((state) => state);
-    const [diet, setDiet] = useState([]);
+    const { diets } = useSelector((state) => state);
+
     const [recipe, setRecipe] = useState({
         name: "",
         image: "",
@@ -46,39 +46,29 @@ export default function Form() {
             })
         );
     };
+
+    const handleDietChange = (event) => {
+        const { value, checked } = event.target;
+        if (checked) {
+          setRecipe((prevRecipe) => ({
+            ...prevRecipe,
+            diets: [...prevRecipe.diets, value],
+          }));
+        } else {
+          setRecipe((prevRecipe) => ({
+            ...prevRecipe,
+            diets: prevRecipe.diets.filter((diet) => diet !== value),
+          }));
+        }
+      };
+
     const handlerSubmit = (event) => {
         event.preventDefault();
         dispatch(addRecipe(recipe));
-        console.log(recipe)
         alert("✅Recipe created successfully!!✅");
-        
     };
-    const mapDiets = () => {
-        const filtered = diets.filter((d) => !diet.includes(d.name));
-        return filtered.map((di, i) => {
-            return (
-                <option value={di} key={i}>
-                    {di}</option>
-            );
-            
-        });
-    };
-    const dietHandler = (event) => {
-        if (event.target.value) {
-            setDiet([...diets, event.target.value]);
-            setRecipe({ ...recipe, diets: [...diets, event.target.value] });
-            event.target.value = "Choose your diets 🥰"
-        }
-    };
-   
 
-    const deleteDiet = (event) => {
-        setDiet(diet.filter((d) => d !== event));
-        setRecipe({
-            ...recipe,
-            diets: recipe.diets.filter((d) => d !== event),
-        });
-    };
+
     return (
         <div className={style.container}>
             <form onSubmit={handlerSubmit}>
@@ -114,7 +104,7 @@ export default function Form() {
                     rows="10"
                     onChange={inputChange}
                 />
-                  <label>summary: </label>
+                <label>summary: </label>
                 <textarea
                     type="text"
                     name="summary"
@@ -122,34 +112,27 @@ export default function Form() {
                     rows="10"
                     onChange={inputChange}
                 />
-                {error.steps && <p className={style.error}></p>}
-                <label>Diets: </label>
-                <select
-                    onChange={dietHandler}
-                    name="diets"
-                    defaultValue="Choose your diets 🥰">
-                    <option disabled value="Choose your diets 🥰">
-                        Choose your diets 🥰
-                    </option>
-                    {mapDiets()}
-                </select>
-                <div className={style.formDiets}>
-                    {diets?.map((d, i) => {
-                        return (
-                            <button key={i} type="button"
-                                onDoubleClick={() => deleteDiet(d)}>
-                                {d}
-                            </button>
-                        );
-                    })}
-                </div>
+                   <label>Diets:</label>
+        {diets.map((diet) => (
+          <div key={diet.id}>
+            <input
+              type="checkbox"
+              id={`diet-${diet.id}`}
+              value={diet.name}
+              checked={recipe.diets.includes(diet.name)}
+              onChange={handleDietChange}
+            />
+            <label htmlFor={`diet-${diet.id}`}>{diet}</label>
+            {console.log(diet)}
+          </div>
+        ))}
                 {error.diets && <p className={style.error}>{error.diets}</p>}
                 {!error.name && !error.image &&
-                 !error.healthScore && !error.steps &&
-                    diet.length >= 1 ? (
+                    !error.healthScore && !error.steps &&
+                    diets.length >= 1 ? (
                     <button className={style.createButton}>Create</button>
                 ) : (
-                    <button  className={style.disabledButton}>
+                    <button className={style.disabledButton}>
                         Create
                     </button>
                 )}
@@ -159,15 +142,6 @@ export default function Form() {
                 <img src={recipe.image} alt="" className={style.image} />
                 <h3>{recipe.name}</h3>
                 <br />
-                {recipe.diets?.map((diet) => {
-                    console.log(diet)
-                    return (
-                        <div key={diet} className={style.diets}>
-                            <span className={style.diet}>{diet.charAt(0).toUpperCase() + diet.slice(1)}
-                            </span>
-                        </div>
-                    );
-                })}
             </div>
         </div>
 
