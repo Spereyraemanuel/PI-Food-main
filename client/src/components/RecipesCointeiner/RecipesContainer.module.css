@@ -5,4 +5,10 @@
     gap: 1em;
     align-items: center;
     background: url(../../img/slack.jpg);
+    justify-content: center;
+}
+
+.paginado {
+    display: flex;
+    justify-content: center;
 }

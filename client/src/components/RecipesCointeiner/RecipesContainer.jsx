@@ -2,25 +2,32 @@ import Paginado from "../Paginado/Paginado"
 import Recipes from "../Recipes/Recipes"
 import style from "./RecipesContainer.module.css"
 import { useSelector } from "react-redux"
+import { useState } from "react"
 
 
 const RecipesContainter = () => {
 
   const infoRecipes = useSelector(state => state.recipes);
 
-  const { numPage } = useSelector(state => state);
-
-  let init = (numPage - 1) * 9
-  let finish = numPage * 9
-  let cantPages = Math.ceil(infoRecipes.length / 9)
-  
-  let viewRecipes = infoRecipes?.slice(init, finish)//solo mostrar 9 cartas
-
-
+  const [page, setPage] = useState(1)
+ const finalPage = page * 9
+ const startPage = finalPage - 9
+  const actualPages = infoRecipes?.slice(startPage,  finalPage)//solo mostrar 9 cartas
+  const totalPage = Math.ceil(infoRecipes.length / 9)
+ 
+  const handlerPrevPage = () => {
+    setPage(page - 1)
+  };
+  const handlerNextPage = () => {
+    setPage(page + 1);
+  }
+  const handlerPageNumber = (n) => {
+    setPage(n)
+  }
 
   return (
     <div className={style.container}>
-      {viewRecipes.map(recipe => {
+      {actualPages.map(recipe => {
         return <Recipes
           key={recipe.id}
           id={recipe.id}
@@ -31,11 +38,15 @@ const RecipesContainter = () => {
           diets={recipe.diets}
           />
       })}
-     <div>
-      <Paginado viewRecipes={viewRecipes} cantPages={cantPages}>
-       
-       </Paginado>
-      </div>
+      <div className={style.paginado}>
+           <Paginado 
+           totalPages={totalPage}
+           page={page}
+           prevPage={handlerPrevPage}
+           nextPage={handlerNextPage}
+           pageNumber={handlerPageNumber}>
+            </Paginado>
+             </div>
     </div>
      
   )

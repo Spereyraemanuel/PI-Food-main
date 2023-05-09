@@ -9,23 +9,9 @@ import {
     ALPHABETIC_ORDER,
     GET_DETAIL_RECIPE,
     CLEAN_STATES,
-    NEXT_PAGE,
-    PREV_PAGE,
     DELETE_FILTERS,
   } from "./actions-types";
 
-
-export function nextPage(){
-    return{
-    type: NEXT_PAGE,
-    };
-}
-
-export function prevPage(){
-    return{
-     type: PREV_PAGE
-    }
-}
 
 export const addRecipe = (recipe) => {
     return async function (dispatch) {
