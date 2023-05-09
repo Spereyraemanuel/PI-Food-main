@@ -31,10 +31,13 @@ const RecipesContainter = () => {
           diets={recipe.diets}
           />
       })}
+     <div>
       <Paginado viewRecipes={viewRecipes} cantPages={cantPages}>
        
-      </Paginado>
+       </Paginado>
+      </div>
     </div>
+     
   )
 }
 

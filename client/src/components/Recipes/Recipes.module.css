@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    width: 300px;
-    height: 300px;
+    width: 312px;
+    height: 312px;
     padding: 10px;
     flex-direction: column;
 }
@@ -29,5 +29,10 @@
 .dietas2{
     margin: 0;
     padding:0;
+}
+
+.hs{
+    margin: 0;
+    padding:0; 
 }
 
