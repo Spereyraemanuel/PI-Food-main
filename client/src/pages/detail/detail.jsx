@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getDetail } from "../../redux/actions"
 import { useParams } from "react-router-dom";
-
+import style from "./Detail.module.css"
 
 export default function Detail() {
 
@@ -17,14 +17,14 @@ export default function Detail() {
     }, [dispatch, id]);
 
     return (
-        <div>
+        <div className={style.container}>
             <h2>{detail.name}</h2>
             <h3>Id: {detail.id}</h3>
             <img src={detail.image} alt="" />
-            <h4>Diet Types:  {detail.diets?.map((diet) => (
+            <h4 className={style.diets}>Diet Types:  {detail.diets?.map((diet) => (
                     <li key={diet}>{diet}</li>
                 ))}</h4>
-            <h3>HealtScore: {detail.healthScore} </h3>
+            <h3 className={style.hs}>HealtScore: {detail.healthScore} </h3>
             <h4>Summary: </h4>
             <p>{detail.summary?.replace(regExp, "")}</p>
             {detail.steps?.map((s) => {
