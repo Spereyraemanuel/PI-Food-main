@@ -14,7 +14,6 @@ import {
 
 
 
-
 export default function Home() {
     const dispatch = useDispatch();
     const [option, setOption] = useState('');
