@@ -26,9 +26,9 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
   const id = req.params.id;
-  const idRecipes = await getIdRecipes(id, next);
+  const idRecipes = await getIdRecipes(id);
   return res.send(idRecipes);
 });
 

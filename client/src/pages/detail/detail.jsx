@@ -6,15 +6,15 @@ import style from "./Detail.module.css"
 
 export default function Detail() {
 
-    const { id } = useParams()
+    const params = useParams()
     const { detail } = useSelector((state) => state)
     const regExp = /<[^>]*>/g;
     const dispatch = useDispatch();
+
     useEffect(() => {
-        if (id) {
-            dispatch(getDetail(id))
-        }
-    }, [dispatch, id]);
+      dispatch(getDetail(params.id))
+    }, [dispatch, params.id]);
+
 
     return (
         <div className={style.container}>

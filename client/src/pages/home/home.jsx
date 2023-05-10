@@ -72,7 +72,7 @@ export default function Home() {
                     <option value="Ascendente">Ascendente</option>
                     <option value="Descendente">Descendente</option>
                 </select>
-                <select multiple={true} onClick={handleFilterByDiets} value={selectedDiets} onChange={(e) => setSelectedDiets(Array.from(e.target.selectedOptions, (option) => option.value))}>
+                <select onClick={handleFilterByDiets} value={selectedDiets} onChange={(e) => setSelectedDiets(Array.from(e.target.selectedOptions, (option) => option.value))}>
                     {diets.map((diet) => (
                         <option key={diet} value={diet}>
                             {diet}

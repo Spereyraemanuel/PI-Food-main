@@ -16,6 +16,7 @@ export default function Form() {
     }, [dispatch])
 
     const { diets } = useSelector((state) => state);
+    const [diet, setDiet] = useState([]);
 
     const [recipe, setRecipe] = useState({
         name: "",
@@ -33,41 +34,38 @@ export default function Form() {
         steps: "",
         diets: [],
     });
+
+    const handleDiets = (e) => {
+        if (e.target.checked) {
+          setDiet([...diet, e.target.value]);
+          setRecipe({ ...recipe, diets: [...diet, e.target.value] });
+        }else{
+           console.log("la receta no tiene ninguna dieta")
+        };
+    }
+
     const inputChange = (event) => {
-        const { name, value } = event.target;
+        const { name, value, summary } = event.target;
         setRecipe({
             ...recipe,
             [name]: value,
+            [summary]: value,
         });
         setError(
             validation({
                 ...recipe,
                 [name]: value,
+                [summary]: value,     
             })
         );
     };
 
-    const handleDietChange = (event) => {
-        const { value, checked } = event.target;
-        if (checked) {
-          setRecipe((prevRecipe) => ({
-            ...prevRecipe,
-            diets: [...prevRecipe.diets, value],
-          }));
-        } else {
-          setRecipe((prevRecipe) => ({
-            ...prevRecipe,
-            diets: prevRecipe.diets.filter((diet) => diet !== value),
-          }));
-        }
-      };
 
     const handlerSubmit = (event) => {
         event.preventDefault();
         dispatch(addRecipe(recipe));
         alert("✅Recipe created successfully!!✅");
     };
-
 
     return (
         <div className={style.container}>
@@ -112,20 +110,28 @@ export default function Form() {
                     rows="10"
                     onChange={inputChange}
                 />
-                   <label>Diets:</label>
-        {diets.map((diet) => (
-          <div key={diet.id}>
-            <input
-              type="checkbox"
-              id={`diet-${diet.id}`}
-              value={diet.name}
-              checked={recipe.diets.includes(diet.name)}
-              onChange={handleDietChange}
-            />
-            <label htmlFor={`diet-${diet.id}`}>{diet}</label>
-            {console.log(diet)}
+                 <div className={style.types}>
+            <h3>Diets: </h3>
+            <div className={style.typesOrder}>
+              {diets.map((e) => (
+            
+                <div className={style.container}>
+                  <ul className={style.ksCboxtags}>
+                    <li>
+                      <input
+                        onChange={handleDiets}
+                        type="checkbox"
+                        id={`checkbox${e}`}
+                        value={e}
+                      />
+                      <label for={`checkbox${e}`}>{e}</label>
+                    </li>
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+
                 {error.diets && <p className={style.error}>{error.diets}</p>}
                 {!error.name && !error.image &&
                     !error.healthScore && !error.steps &&
@@ -147,5 +153,4 @@ export default function Form() {
 
     );
 }
-
 
