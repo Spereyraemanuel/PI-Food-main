@@ -5,6 +5,9 @@ export default function Paginado({ totalPages, page, prevPage, nextPage, pageNum
     for (let i = 0; i < totalPages; i++) {
         pages.push(i + 1)
     }
+    
+    
+    
     return (
         <div>
             <button onClick={() => prevPage()} disabled={page <= 1} className={style.notSelected}>◀◀</button>
