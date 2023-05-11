@@ -44,6 +44,7 @@ router.post('/', async (req, res) => {
       steps,
       
 });
+
 if (Array.isArray(diets)) {
   for (const dietName of diets) {
     const agregar = await Diet.findAll({
