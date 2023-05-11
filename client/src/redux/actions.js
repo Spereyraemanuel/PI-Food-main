@@ -47,6 +47,7 @@ export const getDetail = (id) => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`http://localhost:3001/recipes/${id}`)
+            console.log("asdasddsa", response,);
             dispatch({type: GET_DETAIL_RECIPE, payload: response.data});
         } catch (error) {
             alert("No existe la receta con el ID indicado");

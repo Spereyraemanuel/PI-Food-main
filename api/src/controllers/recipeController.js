@@ -67,6 +67,7 @@ const getIdRecipes = async (id, next) => {
         }
       })
       return {
+        id: resultFind.id,
         name: resultFind.name,
         summary: resultFind.summary,
         healthScore: resultFind.healthScore,
