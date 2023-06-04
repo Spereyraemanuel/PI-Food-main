@@ -23,7 +23,6 @@
     "morgan": "^1.10.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
-    "redux": "^4.2.1",
     "sequelize": "^6.31.0",
     "sequelize-cli": "^6.6.0"
   },
